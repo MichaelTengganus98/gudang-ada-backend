@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from database import get_db
 from models.seller_product import SellerProduct
@@ -12,6 +12,37 @@ from auth import get_current_user, require_role
 from models.user import UserRole, User
 
 router = APIRouter()
+
+
+@router.get("/seller-products/browse")
+def browse_products(
+    query: str = Query(None),
+    seller_id: int = Query(None),
+    db: Session = Depends(get_db),
+):
+    q = db.query(SellerProduct).join(SellerProduct.product).join(SellerProduct.seller)
+
+    if query:
+        q = q.filter(
+            (Product.name.ilike(f"%{query}%")) | (User.name.ilike(f"%{query}%"))
+        )
+
+    if seller_id:
+        q = q.filter(SellerProduct.seller_id == seller_id)
+
+    results = q.all()
+
+    return [
+        {
+            "seller_id": sp.seller.id,
+            "seller_name": sp.seller.name,
+            "product_id": sp.product.id,
+            "product_name": sp.product.name,
+            "quantity": sp.quantity,
+            "price": sp.price,
+        }
+        for sp in results
+    ]
 
 
 @router.post("/", response_model=SellerProductOut)

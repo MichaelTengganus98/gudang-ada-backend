@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Enum, DateTime
 from sqlalchemy.orm import relationship
-from database import Base
+from .base import Base
 import enum
 
 
@@ -24,3 +24,4 @@ class User(Base):
     deleted_at = Column(DateTime, nullable=True)
 
     seller_products = relationship("SellerProduct", back_populates="seller")
+    cart = relationship("Cart", back_populates="user", uselist=False)
