@@ -17,6 +17,7 @@ router = APIRouter()
 def create_product(
     product: ProductCreate,
     db: Session = Depends(get_db),
+    current_user=Depends(require_role(UserRole.internal)),
 ):
     product_data = product.dict()
     product_data["image_url"] = str(product_data["image_url"])
