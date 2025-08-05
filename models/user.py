@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Enum
+from sqlalchemy import Column, Integer, String, Enum, DateTime
+from sqlalchemy.orm import relationship
 from database import Base
 import enum
 
@@ -19,3 +20,7 @@ class User(Base):
     phone_number = Column(String)
     password = Column(String)
     role = Column(Enum(UserRole))
+
+    deleted_at = Column(DateTime, nullable=True)
+
+    seller_products = relationship("SellerProduct", back_populates="seller")
