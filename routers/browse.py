@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, Path, Depends, Query
+from fastapi import APIRouter, Query, Path, Depends
 from sqlalchemy.orm import Session
 from models.seller_product import SellerProduct
 from models.user import User
