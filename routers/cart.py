@@ -26,7 +26,7 @@ def get_cart_count(
     return {"count": total_items}
 
 
-@router.get("/", response_model=CartOut)
+@router.get("", response_model=CartOut)
 def get_user_cart(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.buyer)),
@@ -48,7 +48,7 @@ def get_user_cart(
     return cart
 
 
-@router.post("/")
+@router.post("")
 def add_to_cart(
     req: CartProductAdd,
     db: Session = Depends(get_db),

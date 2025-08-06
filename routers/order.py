@@ -60,7 +60,7 @@ def checkout(
     db.commit()
     return {"message": "Checkout successful"}
 
-@router.get("/", response_model=List[OrderOut])
+@router.get("", response_model=List[OrderOut])
 def get_orders(
     buyer_id: Optional[str] = Query(None),
     seller_id: Optional[str] = Query(None),

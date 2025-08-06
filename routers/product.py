@@ -13,7 +13,7 @@ from datetime import datetime
 router = APIRouter()
 
 
-@router.post("/", response_model=ProductOut)
+@router.post("", response_model=ProductOut)
 def create_product(
     product: ProductCreate,
     db: Session = Depends(get_db),
@@ -28,7 +28,7 @@ def create_product(
     return db_product
 
 
-@router.get("/", response_model=List[ProductOut])
+@router.get("", response_model=List[ProductOut])
 def list_products(db: Session = Depends(get_db)):
     return db.query(Product).filter(Product.deleted_at == None).all()
 

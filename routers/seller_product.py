@@ -45,7 +45,7 @@ def browse_products(
     ]
 
 
-@router.post("/", response_model=SellerProductOut)
+@router.post("", response_model=SellerProductOut)
 def create_seller_product(
     item: SellerProductBase,
     db: Session = Depends(get_db),
