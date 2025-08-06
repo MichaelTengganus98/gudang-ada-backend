@@ -5,7 +5,7 @@ from routers import user_router
 from models import user
 =======
 from database import engine
-from routers import user_router, product, seller_product, browse, cart
+from routers import user_router, product, seller_product, browse, cart, order
 from models.base import Base
 from fastapi.middleware.cors import CORSMiddleware
 >>>>>>> db2901f... implement cart
@@ -30,4 +30,8 @@ app.include_router(product.router, prefix="/api/products", tags=["products"])
 app.include_router(seller_product.router, prefix="/api/seller-products", tags=["seller-products"])
 app.include_router(browse.router, prefix="/api/browse", tags=["browse"])
 app.include_router(cart.router, prefix="/api/cart", tags=["cart"])
+<<<<<<< HEAD
 >>>>>>> db2901f... implement cart
+=======
+app.include_router(order.router, prefix="/api/orders", tags=["orders"])
+>>>>>>> 7ee69f9... implement Order
