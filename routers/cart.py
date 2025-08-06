@@ -6,9 +6,9 @@ from models.seller_product import SellerProduct
 from models.user import UserRole, User
 from models.cart_product import CartProduct
 from models.cart import Cart
-from schemas.cart_product import (
-    AddCartProductRequest,
-    UpdateCartProductRequest,
+from schemas.cart import (
+    CartProductAdd,
+    CartProductUpdate,
     CartOut,
 )
 
@@ -50,7 +50,7 @@ def get_user_cart(
 
 @router.post("/")
 def add_to_cart(
-    req: AddCartProductRequest,
+    req: CartProductAdd,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.buyer)),
 ):
@@ -110,7 +110,7 @@ def delete_cart_product(
 @router.put("/{cart_product_id}")
 def update_cart_quantity(
     cart_product_id: int,
-    req: UpdateCartProductRequest,
+    req: CartProductUpdate,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.buyer)),
 ):
