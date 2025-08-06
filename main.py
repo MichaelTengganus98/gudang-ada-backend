@@ -16,6 +16,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def root():
+    return {"message": "Gudang Ada Backend Assignement Test"}
+
 app.include_router(user_router.router, prefix="/api/users", tags=["users"])
 app.include_router(product.router, prefix="/api/products", tags=["products"])
 app.include_router(seller_product.router, prefix="/api/seller-products", tags=["seller-products"])

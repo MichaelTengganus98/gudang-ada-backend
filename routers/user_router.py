@@ -55,7 +55,7 @@ def login_user(login_data: UserLogin, db: Session = Depends(get_db)):
     }
 
 
-@router.get("/", response_model=List[UserOut])
+@router.get("", response_model=List[UserOut])
 def get_users(role: Optional[UserRole] = None, db: Session = Depends(get_db)):
     if role:
         users = db.query(User).filter(User.role == role).all()

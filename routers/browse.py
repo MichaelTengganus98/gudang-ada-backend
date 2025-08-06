@@ -8,7 +8,7 @@ from database import get_db
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("")
 def browse_products(
     query: str = Query(None),
     seller_id: int = Query(None),
